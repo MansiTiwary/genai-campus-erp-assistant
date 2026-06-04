@@ -169,3 +169,10 @@ genai-campus-erp-assistant/
 🚧 Currently under active development.
 
 This project is being developed as a real-world Generative AI application to demonstrate enterprise-grade AI integration with academic ERP systems.
+
+
+## Copyright
+
+© 2026 Mansi Tiwary. All Rights Reserved.
+
+This project and its source code may not be copied, modified, distributed, or used for commercial purposes without explicit written permission from the author.
