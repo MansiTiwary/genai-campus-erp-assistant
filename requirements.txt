@@ -2,7 +2,3 @@ fastapi
 uvicorn
 sqlalchemy
 pymysql
-streamlit
-google-generativeai
-langchain
-chromadb

@@ -1,4 +1,4 @@
-# 🎓 GenAI-Powered Campus ERP Assistant
+# AI Powered Campus ERP Assistant
 
 An AI-driven Campus ERP Assistant that enables students to access academic information through natural language conversations. The system integrates Generative AI, Function Calling, RAG (Retrieval-Augmented Generation), and MySQL database connectivity to provide real-time responses for attendance, examinations, assignments, placements, and academic records.
 
