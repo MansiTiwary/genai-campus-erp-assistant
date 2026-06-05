@@ -138,3 +138,118 @@ def student_cgpa(name: str):
             "cgpa": row.cgpa,
             "ai_response": answer
         }
+@app.get("/attendance-summary")
+def attendance_summary(student_id: int):
+
+    with engine.connect() as conn:
+
+        result = conn.execute(
+            text("""
+                SELECT attendance_percentage
+                FROM attendance
+                WHERE student_id=:id
+            """),
+            {"id": student_id}
+        )
+
+        row = result.fetchone()
+
+        if not row:
+            return {"message": "Attendance not found"}
+
+        prompt = f"""
+        Student attendance is {row.attendance_percentage}%.
+
+        Give a professional attendance analysis.
+        """
+
+        answer = ask_gemini(prompt)
+
+        return {
+            "attendance": row.attendance_percentage,
+            "ai_response": answer
+        }
+@app.get("/fee-status")
+def fee_status(student_id: int):
+
+    with engine.connect() as conn:
+
+        result = conn.execute(
+            text("""
+                SELECT pending_fee,status
+                FROM fees
+                WHERE student_id=:id
+            """),
+            {"id": student_id}
+        )
+
+        row = result.fetchone()
+
+        if not row:
+            return {"message": "Fee record not found"}
+
+        prompt = f"""
+        Pending Fee: {row.pending_fee}
+        Status: {row.status}
+
+        Explain fee status professionally.
+        """
+
+        answer = ask_gemini(prompt)
+
+        return {
+            "pending_fee": float(row.pending_fee),
+            "status": row.status,
+            "ai_response": answer
+        }
+@app.get("/placement-eligibility")
+def placement_eligibility(student_id: int):
+
+    with engine.connect() as conn:
+
+        student = conn.execute(
+            text("""
+                SELECT first_name,branch,cgpa
+                FROM students
+                WHERE student_id=:id
+            """),
+            {"id": student_id}
+        ).fetchone()
+
+        if not student:
+            return {"message":"Student not found"}
+
+        companies = conn.execute(
+            text("""
+                SELECT company_name,min_cgpa
+                FROM companies
+            """)
+        ).fetchall()
+
+        eligible = []
+
+        for company in companies:
+
+            if student.cgpa >= company.min_cgpa:
+
+                eligible.append(company.company_name)
+
+        prompt = f"""
+        Student Name: {student.first_name}
+        Branch: {student.branch}
+        CGPA: {student.cgpa}
+
+        Eligible Companies:
+        {', '.join(eligible)}
+
+        Give placement guidance.
+        """
+
+        answer = ask_gemini(prompt)
+
+        return {
+            "student": student.first_name,
+            "cgpa": student.cgpa,
+            "eligible_companies": eligible,
+            "ai_response": answer
+        }
