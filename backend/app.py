@@ -253,3 +253,21 @@ def placement_eligibility(student_id: int):
             "eligible_companies": eligible,
             "ai_response": answer
         }
+# uvicorn app:app --reload
+
+@app.get("/companies")
+def companies():
+
+    with engine.connect() as conn:
+
+        result = conn.execute(
+            text("""
+            SELECT *
+            FROM companies
+            """)
+        )
+
+        return [
+            dict(row._mapping)
+            for row in result
+        ]
