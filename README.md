@@ -6,9 +6,13 @@ An AI-driven Campus ERP Assistant that enables students to access academic infor
 GenAI-Powered Campus ERP Assistant
 
 • Developed a FastAPI and MySQL based ERP assistant integrated with Google Gemini AI.
+
 • Implemented natural language querying for student academic records.
+
 • Built AI-powered insights for attendance, CGPA, assignments, and examination data.
+
 • Designed REST APIs for enterprise-scale academic management.
+
 ---
 
 ## 🚀 Project Overview
