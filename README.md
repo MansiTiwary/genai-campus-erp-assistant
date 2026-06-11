@@ -29,7 +29,10 @@ Traditional ERP systems require students to navigate multiple dashboards and men
 * Who is teaching Operating Systems this semester?
 
 ---
+## ✨ Screenshot
+![Campus ERP Assistant](image/homepage.png)
 
+---
 ## ✨ Key Features
 
 ### Student Management
